@@ -1,0 +1,11 @@
+---
+# php basic configuration
+# ~~~~~~~~~~~~~~~~~~~~~~~
+# These configurations will be included in /etc/php.ini file
+memory_limit: '512M'
+
+# php opcache module configuration
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# These configurations will be included in /etc/php.d/10-opcache.ini
+opcache_max_accelerated_files: 10000
+opcache_revalidate_freq: 1
