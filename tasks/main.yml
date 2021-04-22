@@ -1,0 +1,48 @@
+---
+- name: Ensure REMI rpm repo is installed
+  yum:
+    name: 'http://rpms.remirepo.net/enterprise/remi-release-7.rpm'
+    state: latest
+  become: yes
+  tags: php-rpm
+
+- name: Ensure PHP version 7.3 is installed along appropriate packages
+  yum:
+    name:
+    - php
+    - php-intl
+    - php-zip
+    - php-gd
+    - php-xml
+    - php-soap
+    - php-xmlrpc
+    - php-mbstring
+    - php-json
+    - php-gd
+    - php-mcrypt
+    - php-amqp
+    - php-bcmath
+    - php-pdo
+    - php-pgsql
+    - php-posix
+    - php-pecl-zip
+    - php-pecl-redis
+    - php-opcache
+    state: latest
+    enablerepo: 'remi-php73'
+  become: yes
+  tags: php-rpm
+
+- name: Ensure php basic configuration is correct
+  template:
+    src: 'php.ini.j2'
+    dest: '/etc/php.ini'
+  become: yes
+  tags: php-conf
+
+- name: Ensure php opcache configuration is correct
+  template:
+    src: '10-opcache.ini.j2'
+    dest: '/etc/php.d/10-opcache.ini'
+  become: yes
+  tags: php-conf
