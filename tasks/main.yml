@@ -2,7 +2,8 @@
 - name: Ensure REMI rpm repo is installed
   yum:
     name: 'http://rpms.remirepo.net/enterprise/remi-release-7.rpm'
-    state: latest
+    # state: present, in order not to upgrade any package to an untested version
+    state: present
   become: yes
   tags: php-rpm
 
@@ -28,7 +29,8 @@
     - php-pecl-zip
     - php-pecl-redis
     - php-opcache
-    state: latest
+    # state: present, in order not to upgrade any package to an untested version
+    state: present
     enablerepo: 'remi-php73'
   become: yes
   tags: php-rpm
